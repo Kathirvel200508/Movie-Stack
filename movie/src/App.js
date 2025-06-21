@@ -5,10 +5,12 @@ import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import FavoritePage from './components/FavoritePage';
 import Navbar from './components/Navbar';
 import SearchBar from './components/SearchBar';
+import LoginPage from './components/LoginPage';
 function App() {
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
   const [movies, setMovies] = useState([]);
   const [fav, setFav] = useState([]);
+  const [user, setUser] = useState(null);
   const toggleFavorite = (movie) => {
     const isAlreadyFav = fav.some((favMovie) => favMovie.id === movie.id);
 
@@ -43,13 +45,24 @@ useEffect(() => {
   fetchMovies();
 }, [API_KEY]);
 
+  if (!user) {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage onLogin={setUser} />} />
+          <Route path="/signup" element={<LoginPage onLogin={setUser} />} />
+          <Route path="*" element={<LoginPage onLogin={setUser} />} />
+        </Routes>
+      </Router>
+    );
+  }
 
   return (
     <>
     <Router>
   <nav>
     <Navbar/>
-    <Link to="/">Home</Link> | <Link to="/favorites">Favorites</Link> | <Link to="/Search">Search</Link>
+    <Link to="/">Home</Link> | <Link to="/favorites">Favorites</Link> | <Link to="/Search">Search</Link> | <button onClick={() => setUser(null)}>Logout</button>
   </nav>
 
   <Routes>
