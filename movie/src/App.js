@@ -4,11 +4,15 @@ import MovieCard from './components/movieCard';
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import FavoritePage from './components/FavoritePage';
 import Navbar from './components/Navbar';
+import WatchLater from './components/WatchLater';
 import SearchBar from './components/SearchBar';
+
 function App() {
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
   const [movies, setMovies] = useState([]);
   const [fav, setFav] = useState([]);
+  const [watchLater, setWatch] = useState([]);
+
   const toggleFavorite = (movie) => {
     const isAlreadyFav = fav.some((favMovie) => favMovie.id === movie.id);
 
@@ -18,6 +22,16 @@ function App() {
       setFav([...fav, movie]);
     }
   };
+
+    const toggleWatchList = (movie) => {
+  const isAlreadyInList = watchLater.some(item => item.id === movie.id);
+  
+  if (isAlreadyInList) {
+    setWatch(watchLater.filter(item => item.id !== movie.id));
+  } else {
+    setWatch([...watchLater, movie]);
+  }
+};
 
 useEffect(() => {
   const fetchMovies = async () => {
@@ -43,13 +57,17 @@ useEffect(() => {
   fetchMovies();
 }, [API_KEY]);
 
-
+const removeFromWatchList = (movieID) => {
+  setWatch(watchLater.filter(movie => movie.id !== movieID));
+}
   return (
     <>
     <Router>
   <nav>
     <Navbar/>
-    <Link to="/">Home</Link> | <Link to="/favorites">Favorites</Link> | <Link to="/Search">Search</Link>
+    <div className="navlink">
+    <Link to="/">Home</Link> | <Link to="/favorites">Favorites</Link> | <Link to="/Search">Search</Link> | <Link to="/WatchLater">Watch Later</Link>
+    </div>
   </nav>
 
   <Routes>
@@ -59,6 +77,8 @@ useEffect(() => {
         <MovieCard
           movies={movies}
           favorites={fav}
+          watchLater = {watchLater}
+          toggleWatchList={toggleWatchList}
           toggleFavorite={toggleFavorite}
         />
       }
@@ -75,6 +95,12 @@ useEffect(() => {
     path="/Search"
     element={
       <SearchBar movies={movies}/>
+    }/>
+    <Route  
+    path="/WatchLater"
+    element={
+      <WatchLater watchLater={watchLater} toggleWatchList={toggleWatchList} removeFromWatchList={removeFromWatchList}/>
+      
     }/>
   </Routes>
 </Router>
