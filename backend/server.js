@@ -42,11 +42,9 @@ app.post('/api/login', (req, res) => {
   res.json({ user: { email } });
 });
 
-// Password reset (demo: always succeeds)
 app.post('/api/reset-password', (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ error: 'Email required' });
-  // In real app, send email. Here, just respond success.
   res.json({ success: true });
 });
 
