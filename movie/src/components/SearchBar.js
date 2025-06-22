@@ -34,10 +34,10 @@ function SearchBar({ movies, genres, favmovies, watchLater, toggleFavorite, togg
               Genres:{" "}
               {movie.genre_ids.map((id) => genres?.[id]).filter(Boolean).join(", ")}
             </p>
-            <button onClick={() => toggleFavorite(movie)}>
+            <button className="favo-btn" onClick={() => toggleFavorite(movie)}>
               {isFav ? '💔 Remove Favorite' : '❤️ Add Favorite'}
             </button>
-            <button onClick={() => toggleWatchList(movie)}>
+            <button className="watch-btn" onClick={() => toggleWatchList(movie)}>
               {isWatch ? '❌ Remove Watch Later' : '📺 Add Watch Later'}
             </button>
           </div>
@@ -81,9 +81,9 @@ function SearchBar({ movies, genres, favmovies, watchLater, toggleFavorite, togg
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <button onClick={handleInput}>Search</button>
+      <button className="search-btn" onClick={handleInput}>Search</button>
 
-      <select onChange={(e) => handleGenreSearch(e.target.value)}>
+      <select className="dropdown-menu" onChange={(e) => handleGenreSearch(e.target.value)}>
         <option value="">Search By Genre</option>
         {Object.entries(genres || {}).map(([id, name]) => (
           <option key={id} value={name}>{name}</option>
@@ -99,7 +99,7 @@ function SearchBar({ movies, genres, favmovies, watchLater, toggleFavorite, togg
             const isWatch = watchLater.some((m) => m.id === movie.id);
 
             return (
-              <div key={movie.id} className="element">
+              <div key={movie.id} className="cards">
                 <h2>{movie.title}</h2>
                 <img
                   src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}

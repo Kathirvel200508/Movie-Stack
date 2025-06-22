@@ -5,8 +5,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import FavoritePage from './components/FavoritePage';
 import Navbar from './components/Navbar';
 import WatchLater from './components/WatchLater';
+import WatchLater from './components/WatchLater';
 import SearchBar from './components/SearchBar';
-import LoginPage from './components/LoginPage'; 
+import LoginPage from './components/LoginPage';
 
 function App() {
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
@@ -14,8 +15,8 @@ function App() {
   const [fav, setFav] = useState([]);
   const [watchLater, setWatch] = useState([]);
   const [genres, setGenres] = useState({});
-  const [user, setUser] = useState(null); 
-  console.log(API_KEY);
+  const [user, setUser] = useState(null);
+
   const toggleFavorite = (movie) => {
     const isAlreadyFav = fav.some((favMovie) => favMovie.id === movie.id);
     if (isAlreadyFav) {
@@ -36,46 +37,40 @@ function App() {
 
   const removeFromWatchList = (movieID) => {
     setWatch(watchLater.filter(movie => movie.id !== movieID));
-  }
+  };
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
         let allMovies = [];
-
         for (let page = 1; page <= 5; page++) {
           const res = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}&page=${page}`);
           if (!res.ok) throw new Error(`Page ${page} failed`);
-
           const data = await res.json();
           allMovies = [...allMovies, ...data.results];
         }
-
         setMovies(allMovies);
       } catch (err) {
         console.error(err);
       }
     };
-
     fetchMovies();
   }, [API_KEY]);
+
   useEffect(() => {
     const fetchGenres = async () => {
       try {
         const res = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`);
         const data = await res.json();
-
         const genreMap = {};
         data.genres.forEach((genre) => {
           genreMap[genre.id] = genre.name;
         });
-
         setGenres(genreMap);
       } catch (err) {
         console.error("Failed to fetch genres:", err);
       }
     };
-
     fetchGenres();
   }, [API_KEY]);
 
@@ -117,20 +112,20 @@ function App() {
             />
           }
         />
-        <Route path="/favorites" element={<FavoritePage favmovies={fav} />} />
+        <Route path="/favorites" element={<FavoritePage favmovies={fav} toggleFavorites={toggleFavorite} />} />
         <Route
-        path="/Search"
-        element={
-        <SearchBar
-        movies={movies}
-        genres={genres}
-        favmovies={fav}
-        toggleFavorite={toggleFavorite}
-        toggleWatchList={toggleWatchList}
-        watchLater={watchLater}
+          path="/Search"
+          element={
+            <SearchBar
+              movies={movies}
+              genres={genres}
+              favmovies={fav}
+              toggleFavorite={toggleFavorite}
+              toggleWatchList={toggleWatchList}
+              watchLater={watchLater}
+            />
+          }
         />
-  }
-/>
         <Route
           path="/WatchLater"
           element={
