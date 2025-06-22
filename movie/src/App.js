@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import FavoritePage from './components/FavoritePage';
 import Navbar from './components/Navbar';
 import WatchLater from './components/WatchLater';
-import WatchLater from './components/WatchLater';
 import SearchBar from './components/SearchBar';
 import LoginPage from './components/LoginPage';
 

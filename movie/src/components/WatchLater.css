@@ -12,10 +12,34 @@
     background-color: black;
     color: white;
     border: none;
-    margin-left: 15px;
+    margin-left: 13px;
     text-align: center;
     margin-bottom: 20px;
     padding-top: 50px;
     position: relative;
     border-radius: 12%;
+}
+.watch button {
+    margin-top: 10px;
+    position:relative;
+    height: 35px;
+    background-color: lightgreen;
+    width: 190px;
+    border: none;
+    border-radius: 12px;
+}
+@media (max-width: 768px) {
+    .watch {
+        width: 47%;
+    }
+    
+}
+@media (max-width: 430px) {
+    .watch {
+        width: 94%;
+    }
+    .watch img {
+        width: 120px;
+        height: auto;
+    }
 }

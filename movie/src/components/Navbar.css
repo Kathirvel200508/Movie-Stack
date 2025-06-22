@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+.NavBar {
+    background-color: #ba7575;
+    height: 50px;
+    padding-top: 15px;
+
+}
+.NavBar h2 {
+    text-align: center;
+    font-size: 30px;
+    color: black;
+}

@@ -1,8 +1,9 @@
+import './Navbar.css';
 function Navbar() {
     return (
         <>
             <div className="NavBar">
-                <h1>Movie Recommender</h1>
+                <h2>Movie Stack</h2>
             </div>
         </>
     )

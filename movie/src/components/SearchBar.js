@@ -99,7 +99,7 @@ function SearchBar({ movies, genres, favmovies, watchLater, toggleFavorite, togg
             const isWatch = watchLater.some((m) => m.id === movie.id);
 
             return (
-              <div key={movie.id} className="cards">
+              <div key={`${movie.id}-${movie.title}`} className="cards">
                 <h2>{movie.title}</h2>
                 <img
                   src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
