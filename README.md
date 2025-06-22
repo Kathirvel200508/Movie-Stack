@@ -2,7 +2,7 @@ This is a Movie Application built to keep track of your
 favorite, already watched, watch later movies using the 
 help of TMDb API integration.
 
-## 🚀 Features
+## Features
 
 - 🔍 **Search Movies** – by exact title or genre.
 - ❤️ **Add to Favorites** – save movies you love.
@@ -11,7 +11,7 @@ help of TMDb API integration.
 - 🌐 **TMDb API Integration** – fetches real-time trending movies.
 
 ---
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Frontend:** React, CSS
 - **Routing:** React Router
@@ -19,7 +19,7 @@ help of TMDb API integration.
 - **State Management:** React Hooks (`useState`, `useEffect`)
 
 ---
-## 📦 Installation
+## Installation
 
 ```bash
 git clone https://github.com/Kathirvel200508/Movie-Stack.git
