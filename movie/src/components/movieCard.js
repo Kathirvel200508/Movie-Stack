@@ -14,7 +14,7 @@ function MovieCard({ movies, favorites, watchLater, toggleWatchList, toggleFavor
             <button className="fav-btn" onClick={() => toggleFavorite(movie)}>
               {isFav ? '💔 Remove' : '❤️ Add'}
             </button>
-
+            
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
